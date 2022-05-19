@@ -1,11 +1,11 @@
-let colors = ['red', 'blue', 'green']
+let colors = ['white', 'red', 'green', 'blue']
 
 function main() {
     let plane = document.getElementById('place');
     let ctx = plane.getContext('2d');
     let canBound = plane.getBoundingClientRect();
 
-    let selColor = 1;
+    let selColor = 0;
     let x = 0;
     let y = 0;
 
@@ -70,17 +70,41 @@ function main() {
 
     // Change colors
     document.getElementById('red').addEventListener('click', function() {
-        selColor = 0;
-    });
-
-    document.getElementById('blue').addEventListener('click', function() {
         selColor = 1;
     });
 
-    document.getElementById('green').addEventListener('click', function() {
+    document.getElementById('blue').addEventListener('click', function() {
         selColor = 2;
     });
 
+    document.getElementById('green').addEventListener('click', function() {
+        selColor = 3;
+    });
+
+    document.getElementById('white').addEventListener('click', function() {
+        selColor = 0;
+    });
+
+
+    //on clicking #display
+    document.getElementById('display').addEventListener('click', function() {
+        displayOutput()
+    });
+    
+    alf = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+    let output = document.getElementById('commands');
+
+    function displayOutput() {
+        output.innerText = "";
+        for (let i = 0; i < 16; i++) {
+            for (let j = 0; j < 16; j++) {
+                if (placeData[i][j] != 0) {
+                    output.innerText += "r!pl " + i + alf[j] + " " + colors[placeData[i][j]] + "\n";
+                }
+            }
+        }
+    }
 }
 
 main();
