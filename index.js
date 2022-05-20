@@ -23,6 +23,7 @@ let canBound = plane.getBoundingClientRect();
 
 // Selected color (default: black)
 let selColor = 0;
+let selOption = 1;
 
 // Initialize the plane
 let placeData = new Array(32);
@@ -41,13 +42,48 @@ document.body.addEventListener('mousemove', function(e) {
     if (x > 0 && x < plane.width && y > 0 && y < plane.height && e.buttons === 1) {
     
         if (e.button == 0) {
-            placeData[Math.floor(y/16)][Math.floor(x/16)] = selColor;
+            paint(Math.floor(y/16), Math.floor(x/16), selColor, selOption);
         }
     
     }
     render();
 });
 
+function paint(x, y, selColor, selOption) {
+    //selOption = 1: 1px
+    //selOption = 2: 2px
+    //selOption = 3: fill
+
+
+    if (selOption == 1) {
+        placeData[x][y] = selColor;
+    }
+
+    if (selOption == 2) {
+        placeData[x][y] = selColor;
+        placeData[x][y+1] = selColor;
+        placeData[x][y-1] = selColor;
+        placeData[x+1][y] = selColor;
+        placeData[x+1][y+1] = selColor;
+        placeData[x+1][y-1] = selColor;
+        placeData[x-1][y] = selColor;
+        placeData[x-1][y+1] = selColor;
+        placeData[x-1][y-1] = selColor;
+    }
+
+    if (selOption == 3) {
+        for (let i = 0; i < 32; i++) {
+            placeData[x][i] = selColor;
+        }
+    }
+
+    if (selOption == 4) {
+        for (let i = 0; i < 32; i++) {
+            placeData[i][y] = selColor;
+        }
+    }
+
+}
 function render() {
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, 512, 512);
@@ -95,5 +131,12 @@ for (let i = 0; i < buttons.length; i++) {
     buttons[i].style.backgroundColor = Object.values(colors)[i];
     buttons[i].addEventListener('click', function(e) {
         selColor = i;
+    })
+}
+
+let sizes = document.getElementsByClassName('input-btn');
+for (let i = 0; i < sizes.length; i++) {
+    sizes[i].addEventListener('click', function(e) {
+        selOption = i+1;
     })
 }
