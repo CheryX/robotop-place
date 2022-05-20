@@ -39,7 +39,7 @@ document.body.addEventListener('mousemove', function(e) {
     x = e.clientX - canBound.left;
     y = e.clientY - canBound.top;
 
-    if (x > 0 && x < plane.width && y > 0 && y < plane.height && e.buttons === 2) {
+    if (x > 0 && x < plane.width && y > 0 && y < plane.height && e.buttons === 1) {
 
         paint(Math.floor(y/16), Math.floor(x/16), selColor, selOption);
     
@@ -48,7 +48,7 @@ document.body.addEventListener('mousemove', function(e) {
 });
 
 document.body.addEventListener('mouseup', function(e) {
-    if (x > 0 && x < plane.width && y > 0 && y < plane.height && e.button === 0) {
+    if (x > 0 && x < plane.width && y > 0 && y < plane.height && e.button === 2) {
     
         paint(Math.floor(y/16), Math.floor(x/16), selColor, selOption);
     
