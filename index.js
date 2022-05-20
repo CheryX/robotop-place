@@ -39,15 +39,23 @@ document.body.addEventListener('mousemove', function(e) {
     x = e.clientX - canBound.left;
     y = e.clientY - canBound.top;
 
-    if (x > 0 && x < plane.width && y > 0 && y < plane.height && e.buttons === 1) {
-    
-        if (e.button == 0) {
-            paint(Math.floor(y/16), Math.floor(x/16), selColor, selOption);
-        }
+    if (x > 0 && x < plane.width && y > 0 && y < plane.height && e.buttons === 2) {
+
+        paint(Math.floor(y/16), Math.floor(x/16), selColor, selOption);
     
     }
     render();
 });
+
+document.body.addEventListener('mouseup', function(e) {
+    if (x > 0 && x < plane.width && y > 0 && y < plane.height && e.button === 0) {
+    
+        paint(Math.floor(y/16), Math.floor(x/16), selColor, selOption);
+    
+    }
+    render();
+});
+
 
 function paint(x, y, selColor, selOption) {
     //selOption = 1: 1px
