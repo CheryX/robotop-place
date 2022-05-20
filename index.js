@@ -38,19 +38,14 @@ document.body.addEventListener('mousemove', function(e) {
     x = e.clientX - canBound.left;
     y = e.clientY - canBound.top;
 
-    render();
-});
-
-document.body.addEventListener('mouseup', function(e) {
-
-    if (x > 0 && x < plane.width && y > 0 && y < plane.height) {
-
+    if (x > 0 && x < plane.width && y > 0 && y < plane.height && e.buttons === 1) {
+    
         if (e.button == 0) {
             placeData[Math.floor(y/16)][Math.floor(x/16)] = selColor;
         }
-
+    
     }
-
+    render();
 });
 
 function render() {
